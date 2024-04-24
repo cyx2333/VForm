@@ -1,5 +1,5 @@
-import page from './page.js'
+import view from './view.js'
 
 export default {
-  page,
+  view,
 }

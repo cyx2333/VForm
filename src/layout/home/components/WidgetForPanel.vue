@@ -1,12 +1,11 @@
 <template>
   <div class="item">
-    <AIcon :name="icon" />
+    <a-icon :name="icon" />
     {{ title }}
   </div>
 </template>
 
 <script setup>
-import AIcon from '@/components/a-icon/a-icon.vue';
 import { defineProps } from 'vue'
 
 defineProps({

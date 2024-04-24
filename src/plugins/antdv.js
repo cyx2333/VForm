@@ -1,9 +1,7 @@
-import {Button, Collapse, Space} from 'ant-design-vue'
+import {Button, Col, Collapse, Grid, Row, Space, Tooltip} from 'ant-design-vue'
 
 export default {
   install(Vue) {
-    Vue.use(Button)
-    Vue.use(Collapse)
-    Vue.use(Space)
+    Vue.use(Button).use(Collapse).use(Space).use(Grid).use(Row).use(Col).use(Tooltip)
   }
 }

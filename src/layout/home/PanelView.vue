@@ -1,8 +1,8 @@
 <template>
   <div class="panel">
-    <a-collapse v-model:activeKey="activeKey" expand-icon-position="end" accordion :bordered="false" ghost>
+    <a-collapse v-model:activeKey="activeKey" expand-icon-position="end" :bordered="false" ghost>
       <a-collapse-panel :header="item.header" v-for="item in list" :key="item.key">
-        <draggable v-model="item.children" :sort="false">
+        <draggable :list="item.children" :group="{name: 'panel', pull: 'clone', forceFallback: false, put: false}" :sort="false" @clone="onClone"  @change="onChange" >
           <template #item="{ element }">
             <widget class="draggable-item" :title="element.title" :icon="element.icon" :key="element.name"/>
           </template>
@@ -13,20 +13,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import widget from './components/WidgetForPanel';
 import draggable from "vuedraggable";
+import { ref } from 'vue';
+import config from '../config'
 
-const activeKey = ref(1)
+const activeKey = ref([1, 2])
 
-const list = [
-  {
-    key: 1, header: '容器', children: [
-      { name: 'grid', title: '栅格', icon: 'TableOutlined' },
-      { name: 'card', title: '卡片', icon: 'CreditCardOutlined' },
-    ]
-  },
-]
+const list = config
+
+const onClone = (e) => {
+  console.log('onClone', e);
+}
+
+const onChange = (e) => {
+  console.log('onChange', e);
+}
 </script>
 
 <style lang="less" scoped>
