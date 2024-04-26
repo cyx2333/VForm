@@ -8,7 +8,7 @@ export default [{
         icon: 'TableOutlined',
         options: {
           hidden: false,
-          status: 0,
+          height: 0,
         }
       },
       {

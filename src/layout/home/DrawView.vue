@@ -25,6 +25,7 @@ const store = useStore()
 
 const onChange = (e) => {
   for (let key in e) {
+    console.log(e, list);
     if (key === 'added') {
       let newIndex = e[key]['newIndex']
       let _list = deepCopyArray(list.value)
@@ -32,11 +33,10 @@ const onChange = (e) => {
       // 只有在 added 时，才添加 key
       item.key = item.type + generateId()
       list.value = _list
-      store.commit('view/change', list)  
+      store.commit('view/change', list.value)  
     }
   }
 }
-
 </script>
 
 <style lang="less" scoped>

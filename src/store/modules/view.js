@@ -1,4 +1,4 @@
-import { deepCopyObject } from "@/utils/util";
+import { deepCopyArray } from "@/utils/util";
 
 export default {
   namespaced: true,
@@ -13,11 +13,18 @@ export default {
     },
     selectKey(state) {
       return state.selectKey
+    },
+    getOptions(state) {
+      if (state.selectKey != '') {
+        return state.widgetList.find(e => e.key === state.selectKey)
+      } else {
+        return []
+      }
     }
   },
   mutations: {
     change(state, params) {
-      state.widgetList = deepCopyObject(params)
+      state.widgetList = deepCopyArray(params)
     },
     select(state, key) {
       state.selectKey = key;
