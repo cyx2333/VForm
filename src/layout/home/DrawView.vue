@@ -13,30 +13,25 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import draggable from "vuedraggable";
 import xcomponent from '../xcomponents'
 import { useStore } from "vuex";
-import { deepCopyArray, generateId } from "@/utils/util";
+import { deepCopyArray } from "@/utils/util";
 
 const list = ref([])
-
 const store = useStore()
 
 const onChange = (e) => {
   for (let key in e) {
-    console.log(e, list);
-    if (key === 'added') {
-      let newIndex = e[key]['newIndex']
-      let _list = deepCopyArray(list.value)
-      let item = _list[newIndex]
-      // 只有在 added 时，才添加 key
-      item.key = item.type + generateId()
-      list.value = _list
-      store.commit('view/change', list.value)  
-    }
+    store.commit('view/change', {key, data: e[key]})  
   }
 }
+
+watch(() => store.getters['view/widgetList'], (val) => {
+  list.value = deepCopyArray(val)
+})
+
 </script>
 
 <style lang="less" scoped>
