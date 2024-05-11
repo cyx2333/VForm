@@ -17,7 +17,6 @@ export default {
   },
   render() {
     const { type, options } = this.options
-    console.log('render', type, options);
     if (type) {
       return h(setting[type], {options})
     } else {
