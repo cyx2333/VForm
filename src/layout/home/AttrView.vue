@@ -13,6 +13,11 @@ import setting from '@/components/setting/settingView'
   width: 300px;
   border-left: 2px dotted #EBEEF5;
   background: #fff;
-  padding: 0 10px;
+  padding: 12px;
+}
+</style>
+<style>
+.attr .ant-form-item{
+  margin-bottom: 12px;
 }
 </style>

@@ -1,24 +1,31 @@
-import { h, ref, watch } from "vue";
+import { h, inject, ref } from "vue";
 import setting from '@/components/setting'
-import { useStore } from "vuex";
+import { deepCopyObject } from "@/utils/util";
 
 export default {
   props: {
   },
   setup() {
-    const store = useStore()
+    const WidgetData = inject('$WidgetData')
+    const key = 'settingView'
     const options = ref({})
-    watch(() => store.state.view.selectKey, () => {
-      options.value = store.getters['view/getOptions']
+
+    WidgetData.addObserver(key, () => {
+      const widgetList = WidgetData.widgetList
+      const selectKey = WidgetData.selectKey
+      if (selectKey) {
+        options.value = deepCopyObject(widgetList.find(e => e.key === selectKey))
+      }
     })
+
     return {
       options,
     }
   },
   render() {
-    const { type, options } = this.options
+    const { type, key, options } = this.options
     if (type) {
-      return h(setting[type], {options})
+      return h(setting[type], {options, key})
     } else {
       return ''
     }

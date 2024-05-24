@@ -1,10 +1,10 @@
 <template>
-  <div :class="['wrapper', selected?'selected':'']" @click="onClick">
+  <div :class="['wrapper', params.selected?'selected':'']" @click="onClick">
     <slot></slot>
-    <div class="drag-handler" v-show="selected">
+    <div class="drag-handler" v-show="params.selected">
       <a-icon name="DragOutlined"></a-icon>
     </div>
-    <div class="container-action" v-show="selected">
+    <div class="container-action" v-show="params.selected">
       <a-tooltip class="i" placement="bottom">
         <template #title>上移组件</template>
         <a-icon name="ArrowUpOutlined" />
@@ -22,21 +22,20 @@
 </template>
 
 <script setup>
-import {computed, defineProps} from 'vue'
-import { useStore } from 'vuex';
+import {defineProps, inject, onBeforeUnmount} from 'vue'
 const props =  defineProps({
   params: Object,
 })
 
-const store = useStore()
-
-const selected = computed(() => {
-  return props.params.key === store.getters['view/selectKey']
-})
+const WidgetData = inject('$WidgetData')
 
 const onClick = () => {
-  store.commit('view/select', props.params.key)
+  WidgetData.setSelectKey(props.params.key)
 }
+
+onBeforeUnmount(() => {
+  WidgetData.removeObserver(props.params.key) 
+})
 </script>
 
 <style lang="less" scoped>
@@ -48,7 +47,7 @@ const onClick = () => {
   margin-bottom: 5px;
   .container-action{
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     right: -2px;
     height: 28px;
     line-height: 28px;

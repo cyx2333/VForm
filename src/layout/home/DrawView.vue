@@ -13,23 +13,26 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { inject, onBeforeUnmount, ref } from "vue";
 import draggable from "vuedraggable";
 import xcomponent from '../xcomponents'
-import { useStore } from "vuex";
-import { deepCopyArray } from "@/utils/util";
 
 const list = ref([])
-const store = useStore()
+const WidgetData = inject('$WidgetData')
+const key = 'DrawView'
+
+WidgetData.addObserver(key, () => {
+  list.value = Array.from(WidgetData.widgetList)
+})
 
 const onChange = (e) => {
   for (let key in e) {
-    store.commit('view/change', {key, data: e[key]})  
+    WidgetData.setWidgetList(key, e[key])
   }
 }
 
-watch(() => store.getters['view/widgetList'], (val) => {
-  list.value = deepCopyArray(val)
+onBeforeUnmount(() => {
+  WidgetData.removeObserver(key) 
 })
 
 </script>

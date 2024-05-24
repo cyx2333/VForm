@@ -8,7 +8,11 @@ export default [{
         icon: 'TableOutlined',
         options: {
           hidden: false,
-          height: 0,
+          height: 50,
+          colList: [
+            {span: 12},
+            {span: 12},
+          ]
         }
       },
       {

@@ -22,12 +22,12 @@ const activeKey = ref([1, 2])
 
 const list = config
 
-const onClone = (e) => {
-  console.log('onClone', e);
+const onClone = () => {
+  // console.log('onClone', e);
 }
 
-const onChange = (e) => {
-  console.log('onChange', e);
+const onChange = () => {
+  // console.log('onChange', e);
 }
 </script>
 

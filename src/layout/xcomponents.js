@@ -1,6 +1,6 @@
 import build from "@/components/build";
 import { deepCopyObject } from "@/utils/util";
-import { h } from "vue";
+import { h, inject, ref } from "vue";
 
 export default {
   props: {
@@ -8,15 +8,39 @@ export default {
   },
   setup(props) {
     const { params } = props
+    const WidgetData = inject('$WidgetData')
+    const data = ref({
+      key: params.key,
+      selected: false,
+      type: params.type,
+      options: params.options
+    })
+    const options = ref({})
+    if (params.key) {
+      WidgetData.addObserver(params.key, () => {
+        const widgetList = WidgetData.widgetList
+        const selectKey = WidgetData.selectKey
+        if (selectKey) {
+          options.value = widgetList.find(e => e.key === selectKey).options
+        }
+        data.value = {
+          key: params.key,
+          selected: selectKey === params.key,
+          options,
+          type: params.type,
+        }
+      })
+    }
+
     return {
-      params,
+      data,
     }
   },
   render() {
-    const params = deepCopyObject(this.params)
-    const type = params.type
+    const data = deepCopyObject(this.data)
+    const type = data.type
     return h(build[type], {
-      params: params
+      params: data
     })
   },
 }

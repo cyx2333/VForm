@@ -18,7 +18,7 @@ const props = defineProps({
   spin: {
     type: Boolean,
     default: false
-  }
+  },
 })
 
 let Icon = computed(()=>{
