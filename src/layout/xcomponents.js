@@ -13,16 +13,14 @@ export default {
       key: params.key,
       selected: false,
       type: params.type,
-      options: params.options
+      options: params.options 
     })
     const options = ref({})
     if (params.key) {
       WidgetData.addObserver(params.key, () => {
         const widgetList = WidgetData.widgetList
         const selectKey = WidgetData.selectKey
-        if (selectKey) {
-          options.value = widgetList.find(e => e.key === selectKey).options
-        }
+        options.value = widgetList.find(e => e.key === params.key).options
         data.value = {
           key: params.key,
           selected: selectKey === params.key,

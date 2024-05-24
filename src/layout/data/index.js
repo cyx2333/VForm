@@ -69,7 +69,6 @@ class WidgetData {
   notify() {
     // 通知观察者
     // 仅通知key为 premier 或 对应selectKey 
-    console.log('notify', this.observers, this.widgetList);
     this.observers.forEach(item => {
       item.callback()
     })
