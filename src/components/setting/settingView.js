@@ -1,6 +1,6 @@
 import { h, inject, ref } from "vue";
 import setting from '@/components/setting'
-import { deepCopyObject } from "@/utils/util";
+// import { deepCopyObject } from "@/utils/util";
 
 export default {
   props: {
@@ -8,24 +8,25 @@ export default {
   setup() {
     const WidgetData = inject('$WidgetData')
     const key = 'settingView'
-    const options = ref({})
+    const params = ref({})
 
     WidgetData.addObserver(key, () => {
-      const widgetList = WidgetData.widgetList
       const selectKey = WidgetData.selectKey
       if (selectKey) {
-        options.value = deepCopyObject(widgetList.find(e => e.key === selectKey))
+        params.value = WidgetData.find(selectKey)
+        console.log(params, WidgetData.widgetList);
       }
     })
 
     return {
-      options,
+      params,
     }
   },
   render() {
-    const { type, key, options } = this.options
-    if (type) {
-      return h(setting[type], {options, key})
+    const { setType } = this.params
+    console.log(setting, setType, setting[setType]);
+    if (setType) {
+      return h(setting[setType], {params: this.params})
     } else {
       return ''
     }

@@ -8,14 +8,14 @@
     labelAlign="left"
   >
     <a-form-item label="隐藏" name="hidden" >
-      <a-switch :checked="options.hidden" @change="val => element.options.hidden = val"/>
+      <a-switch :checked="options.hidden" @change="val => options.hidden = val"/>
     </a-form-item>
-    <a-form-item label="高度" name="height" >
-      <a-input-number :value="options.height" :min="50" @change="val => element.options.height = val" />
+    <a-form-item label="高度" name="colHeight" >
+      <a-input-number :value="options.colHeight" :min="50" @change="val => options.colHeight = val" />
     </a-form-item>
     <a-form-item label="当前栅格列:" :labelCol="{span: 24}" :wrapperCol="{span: 24}">
       <div class="list">
-        <div class="item" v-for="(item, index) in options.colList" :key="index">
+        <div class="item" v-for="(item, index) in children" :key="index">
           <span class="title">栅格宽度{{ index + 1 }}</span>
           <a-input-number class="inputNumber" size="small" :value="item.span" :min="1" :max="24" @change="(val) => colListChange(val, index)" />
           <a-icon class="delete" name="MinusCircleOutlined" size="20" style="color: #ff4d4f;" />
@@ -27,26 +27,30 @@
 </template>
 
 <script setup>
-import { defineProps, inject } from 'vue'
+import { computed, defineProps, inject } from 'vue'
 
 const WidgetData = inject('$WidgetData')
-defineProps({
-  options: Object,
+const props = defineProps({
+  params: Object,
 })
 
-const widgetList = WidgetData.widgetList
-const selectKey = WidgetData.selectKey
-const element = widgetList.find(e => e.key === selectKey)
+const options = computed(() => {
+  return props.params.options
+})
+
+const children = computed(() => {
+  return props.params.children
+})
 
 const add = () => {
-  const item = WidgetData.createReactive({
-    span: 12
-  })
-  element.options.colList.push(item)
+  children.value.push(WidgetData.createReactive(Object.assign({
+    parentKey: props.params.key,
+    content: []
+  },options.value.defaultChildrenOptions)))
 }
 
 const colListChange = (val, index) => {
-  element.options.colList[index].span = val
+  children.value[index].span = val
 }
 
 </script>

@@ -4,26 +4,17 @@
       <a-button class="btn">Layout</a-button>
       <a-button class="btn">Menu</a-button>
     </div>
-    <draggable :list="list" v-bind="{ group: 'panel', ghostClass: 'ghost', handle: '.drag-handler', pull: true, put: false, animation: 300}" class="content" @change="onChange" item-key="key">
-      <template #item="{ element }">
-        <xcomponent :params="element" />
-      </template>
-    </draggable>
+    <DragView :viewKey="key" :list="list" @change="onChange" ></DragView>
   </div>
 </template>
 
 <script setup>
+import DragView from './components/DragView.vue'
 import { inject, onBeforeUnmount, ref } from "vue";
-import draggable from "vuedraggable";
-import xcomponent from '../xcomponents'
 
 const list = ref([])
 const WidgetData = inject('$WidgetData')
-const key = 'DrawView'
-
-WidgetData.addObserver(key, () => {
-  list.value = Array.from(WidgetData.widgetList)
-})
+const key = 'Premier-Draw'
 
 const onChange = (e) => {
   for (let key in e) {
@@ -34,7 +25,6 @@ const onChange = (e) => {
 onBeforeUnmount(() => {
   WidgetData.removeObserver(key) 
 })
-
 </script>
 
 <style lang="less" scoped>
@@ -50,12 +40,6 @@ onBeforeUnmount(() => {
     .btn{
       margin: 0 5px;
     }
-  }
-  .content{
-    background: #fff;
-    width: calc(100% - 20px);
-    min-height: calc(100% - 20px - 42px);
-    margin: 10px;
   }
 }
 .ghost {

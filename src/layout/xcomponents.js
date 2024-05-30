@@ -9,24 +9,11 @@ export default {
   setup(props) {
     const { params } = props
     const WidgetData = inject('$WidgetData')
-    const data = ref({
-      key: params.key,
-      selected: false,
-      type: params.type,
-      options: params.options 
-    })
-    const options = ref({})
+    const obj = Object.assign({}, params)
+    const data = ref(obj)
     if (params.key) {
       WidgetData.addObserver(params.key, () => {
-        const widgetList = WidgetData.widgetList
-        const selectKey = WidgetData.selectKey
-        options.value = widgetList.find(e => e.key === params.key).options
-        data.value = {
-          key: params.key,
-          selected: selectKey === params.key,
-          options,
-          type: params.type,
-        }
+        data.value = deepCopyObject(obj)
       })
     }
 
@@ -35,7 +22,7 @@ export default {
     }
   },
   render() {
-    const data = deepCopyObject(this.data)
+    const data = this.data
     const type = data.type
     return h(build[type], {
       params: data

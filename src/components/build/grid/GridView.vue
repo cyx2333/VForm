@@ -1,7 +1,7 @@
 <template>
   <Wrapper class="grid" :params="params">
     <a-row>
-      <a-col :style="{height: params.options.height + 'px'}" :span="item.span" v-for="(item, index) in params.options.colList" :key="index">col-6</a-col>
+      <ColView :params="params"></ColView>
     </a-row>
   </Wrapper>
 </template>
@@ -9,7 +9,8 @@
 <script setup>
 import Wrapper from '../wrapper'
 import { defineProps } from 'vue';
-
+import ColView from './ColView.vue'
+  
 defineProps({
   params: Object,
 })

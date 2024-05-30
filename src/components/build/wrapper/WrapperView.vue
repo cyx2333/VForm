@@ -1,10 +1,10 @@
 <template>
-  <div :class="['wrapper', params.selected?'selected':'']" @click="onClick">
+  <div :class="['wrapper', selected?'selected':'']" @click.stop="onClick">
     <slot></slot>
-    <div class="drag-handler" v-show="params.selected">
+    <div class="drag-handler" v-show="selected">
       <a-icon name="DragOutlined"></a-icon>
     </div>
-    <div class="container-action" v-show="params.selected">
+    <div class="container-action" v-show="selected">
       <a-tooltip class="i" placement="bottom">
         <template #title>上移组件</template>
         <a-icon name="ArrowUpOutlined" />
@@ -22,12 +22,15 @@
 </template>
 
 <script setup>
-import {defineProps, inject, onBeforeUnmount} from 'vue'
+import {computed, defineProps, inject, onBeforeUnmount} from 'vue'
 const props =  defineProps({
   params: Object,
 })
 
 const WidgetData = inject('$WidgetData')
+const selected = computed(() => {
+  return WidgetData.selectKey === props.params.key
+})
 
 const onClick = () => {
   WidgetData.setSelectKey(props.params.key)

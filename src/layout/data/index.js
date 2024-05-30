@@ -43,27 +43,49 @@ class WidgetData {
     return new Proxy(state, this.proxyHandler())
   }
 
-  setWidgetList(key, data) {
+  setWidgetList(mod, data, list = this.widgetList) {
     // console.log(key, data, this.widgetList);
-    if (key == 'added') {
-      let widgetList = this.widgetList
+    if (mod == 'added') {
+      let widgetList = list
       let newIndex = data['newIndex']
       let element = deepCopyObject(data['element'])
-      element.key = element.type + generateId()
+      element.key = element.type + generateId() // 生成唯一key
+      // 当element中options存在defaultChildrenCount时，生成对应的children（包含 父级key、defaultChildrenOptions中的内容）
+      // bug 5/29 要调整config结构
+      const options = element.options
+      if (options.defaultChildrenCount) {
+        for (let i = 0; i < options.defaultChildrenCount; i++) {
+          let key = options.defaultChildrenOptions.type + generateId()
+          element.children.push(Object.assign({
+            parentKey: element.key,
+            key,
+            children: [],
+          }, {options: options.defaultChildrenOptions}))
+        }
+      }
+
       if (newIndex == widgetList.length) {
         widgetList.push(this.createReactive(element))
       } else if (newIndex < widgetList.length) {
         widgetList.splice(newIndex, 0, element)
       }
     } else {
-      let widgetList = deepCopyArray(this.widgetList)
+      let widgetList = deepCopyArray(list)
       let newIndex = data['newIndex']
       let oldIndex = data['oldIndex']
       let element = widgetList[oldIndex]
       widgetList.splice(oldIndex, 1) // 删除元素
       widgetList.splice(newIndex, 0, element)
-      this.widgetList = widgetList
+      list = widgetList
     }
+  }
+
+  setChildrenWidget(mod, data, parentKey) {
+    // 向子项添加内容
+    console.log(this.widgetList);
+    const list = this.find(parentKey)
+    this.setWidgetList(mod, data, list.children)
+    console.log(this.widgetList);
   }
 
   notify() {
@@ -77,6 +99,25 @@ class WidgetData {
   setSelectKey(key) {
     this.selectKey = key
     this.notify()
+  }
+
+  find(key) {
+    // 对key进行深入查找
+    let res = null
+    const func = (list, key) => {
+      for (let item of list) {
+        if (item.key === key) {
+          res = item
+          break
+        } else {
+          if (item.children) {
+            func(item.children, key)
+          }
+        }
+      }
+    }
+    func(this.widgetList, key)
+    return res
   }
 
   removeObserver(key) {

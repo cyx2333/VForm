@@ -4,16 +4,20 @@ export default [{
     children: [
       {
         type: 'grid',
+        setType: 'grid',
         title: '栅格',
         icon: 'TableOutlined',
         options: {
           hidden: false,
-          height: 50,
-          colList: [
-            {span: 12},
-            {span: 12},
-          ]
-        }
+          colHeight: 50,
+          defaultChildrenCount: 2,
+          defaultChildrenOptions: {
+            span: 12,
+            type: 'col',
+            setType: 'grid'
+          }
+        },
+        children:[],
       },
       {
         type: 'card',
