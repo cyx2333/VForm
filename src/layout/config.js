@@ -4,17 +4,17 @@ export default [{
     children: [
       {
         type: 'grid',
-        setType: 'grid',
         title: '栅格',
         icon: 'TableOutlined',
         options: {
           hidden: false,
           colHeight: 50,
-          defaultChildrenCount: 2,
-          defaultChildrenOptions: {
+        },
+        defaultChildrenCount: 2,
+        defaultChildrenObject: {
+          type: 'col',
+          options: {
             span: 12,
-            type: 'col',
-            setType: 'grid'
           }
         },
         children:[],

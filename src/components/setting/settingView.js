@@ -1,6 +1,6 @@
 import { h, inject, ref } from "vue";
 import setting from '@/components/setting'
-// import { deepCopyObject } from "@/utils/util";
+import { deepCopyObject } from "@/utils/util";
 
 export default {
   props: {
@@ -13,8 +13,8 @@ export default {
     WidgetData.addObserver(key, () => {
       const selectKey = WidgetData.selectKey
       if (selectKey) {
-        params.value = WidgetData.find(selectKey)
-        console.log(params, WidgetData.widgetList);
+        params.value = deepCopyObject(WidgetData.find(selectKey))
+        console.log(params);
       }
     })
 
@@ -23,10 +23,12 @@ export default {
     }
   },
   render() {
-    const { setType } = this.params
-    console.log(setting, setType, setting[setType]);
-    if (setType) {
-      return h(setting[setType], {params: this.params})
+    const { type } = this.params
+    console.log('render');
+    if (type) {
+      return h(setting[type], {
+        params: this.params
+      })
     } else {
       return ''
     }

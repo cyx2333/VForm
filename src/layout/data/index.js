@@ -51,16 +51,15 @@ class WidgetData {
       let element = deepCopyObject(data['element'])
       element.key = element.type + generateId() // 生成唯一key
       // 当element中options存在defaultChildrenCount时，生成对应的children（包含 父级key、defaultChildrenOptions中的内容）
-      // bug 5/29 要调整config结构
-      const options = element.options
-      if (options.defaultChildrenCount) {
-        for (let i = 0; i < options.defaultChildrenCount; i++) {
-          let key = options.defaultChildrenOptions.type + generateId()
-          element.children.push(Object.assign({
+      if (element.defaultChildrenCount) {
+        for (let i = 0; i < element.defaultChildrenCount; i++) {
+          let key = element.defaultChildrenObject.type + generateId()
+          let item = deepCopyObject(Object.assign({
             parentKey: element.key,
             key,
             children: [],
-          }, {options: options.defaultChildrenOptions}))
+          }, element.defaultChildrenObject))
+          element.children.push(item)
         }
       }
 
@@ -82,10 +81,25 @@ class WidgetData {
 
   setChildrenWidget(mod, data, parentKey) {
     // 向子项添加内容
-    console.log(this.widgetList);
     const list = this.find(parentKey)
     this.setWidgetList(mod, data, list.children)
-    console.log(this.widgetList);
+  }
+
+  addChildren(count, parentKey) {
+    // 向对应parentKey添加count数量的子项
+    if (count) {
+      const element = this.find(parentKey)
+      console.log(parentKey, element, this.widgetList);
+      for (let i = 0; i < count; i++) {
+        let key = element.defaultChildrenObject.type + generateId()
+        let item = deepCopyObject(Object.assign({
+          parentKey: element.key,
+          key,
+          children: [],
+        }, element.defaultChildrenObject))
+        element.children.push(this.createReactive(item))
+      }
+    }
   }
 
   notify() {

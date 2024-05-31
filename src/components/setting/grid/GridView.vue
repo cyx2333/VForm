@@ -1,23 +1,23 @@
 <template>
   <a-divider>栅格属性</a-divider>
   <a-form
-    :model="options"
     :label-col="{ span: 6 }"
     :wrapper-col="{ span: 16 }"
     autocomplete="off"
     labelAlign="left"
   >
     <a-form-item label="隐藏" name="hidden" >
-      <a-switch :checked="options.hidden" @change="val => options.hidden = val"/>
+      <a-switch :checked="params.options.hidden" @change="val => element.options.hidden = val"/>
     </a-form-item>
     <a-form-item label="高度" name="colHeight" >
-      <a-input-number :value="options.colHeight" :min="50" @change="val => options.colHeight = val" />
+      <a-input-number :value="params.options.colHeight" :min="50" @change="val => element.options.colHeight = val" />
     </a-form-item>
     <a-form-item label="当前栅格列:" :labelCol="{span: 24}" :wrapperCol="{span: 24}">
       <div class="list">
-        <div class="item" v-for="(item, index) in children" :key="index">
+        {{ params }}
+        <div class="item" v-for="(item, index) in element.children" :key="index">
           <span class="title">栅格宽度{{ index + 1 }}</span>
-          <a-input-number class="inputNumber" size="small" :value="item.span" :min="1" :max="24" @change="(val) => colListChange(val, index)" />
+          <a-input-number class="inputNumber" size="small" :value="item.options.span" :min="1" :max="24" @change="(val) => colListChange(val, index)" />
           <a-icon class="delete" name="MinusCircleOutlined" size="20" style="color: #ff4d4f;" />
         </div>
       </div>
@@ -27,30 +27,21 @@
 </template>
 
 <script setup>
-import { computed, defineProps, inject } from 'vue'
+import { defineProps, inject } from 'vue'
 
 const WidgetData = inject('$WidgetData')
+const selectKey = WidgetData.selectKey
+const element = WidgetData.find(selectKey)
 const props = defineProps({
   params: Object,
 })
 
-const options = computed(() => {
-  return props.params.options
-})
-
-const children = computed(() => {
-  return props.params.children
-})
-
 const add = () => {
-  children.value.push(WidgetData.createReactive(Object.assign({
-    parentKey: props.params.key,
-    content: []
-  },options.value.defaultChildrenOptions)))
+  WidgetData.addChildren(1, props.params.key)
 }
 
 const colListChange = (val, index) => {
-  children.value[index].span = val
+  element.children[index].options.span = val
 }
 
 </script>
