@@ -6,6 +6,7 @@ class WidgetData {
     this.widgetList = this.createReactive([])
     this.observers = []
     this.selectKey = ''
+    this.elementType = ''
   }
 
   addObserver(key, callback) {
@@ -85,11 +86,10 @@ class WidgetData {
     this.setWidgetList(mod, data, list.children)
   }
 
-  addChildren(count, parentKey) {
+  addChildren(count, element) {
     // 向对应parentKey添加count数量的子项
     if (count) {
-      const element = this.find(parentKey)
-      console.log(parentKey, element, this.widgetList);
+      console.log(element, this.widgetList);
       for (let i = 0; i < count; i++) {
         let key = element.defaultChildrenObject.type + generateId()
         let item = deepCopyObject(Object.assign({
@@ -111,8 +111,12 @@ class WidgetData {
   }
 
   setSelectKey(key) {
-    this.selectKey = key
-    this.notify()
+    let element = this.find(key)
+    if (element) {
+      this.selectKey = key
+      this.elementType = element.type // 设置type，提供给setting模块使用
+      this.notify()
+    }
   }
 
   find(key) {

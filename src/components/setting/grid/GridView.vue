@@ -1,20 +1,20 @@
 <template>
   <a-divider>栅格属性</a-divider>
   <a-form
+    :model="element"
     :label-col="{ span: 6 }"
     :wrapper-col="{ span: 16 }"
     autocomplete="off"
     labelAlign="left"
   >
     <a-form-item label="隐藏" name="hidden" >
-      <a-switch :checked="params.options.hidden" @change="val => element.options.hidden = val"/>
+      <a-switch v-model:checked="element.options.hidden" />
     </a-form-item>
     <a-form-item label="高度" name="colHeight" >
-      <a-input-number :value="params.options.colHeight" :min="50" @change="val => element.options.colHeight = val" />
+      <a-input-number v-model:value="element.options.colHeight" :min="50" />
     </a-form-item>
     <a-form-item label="当前栅格列:" :labelCol="{span: 24}" :wrapperCol="{span: 24}">
       <div class="list">
-        {{ params }}
         <div class="item" v-for="(item, index) in element.children" :key="index">
           <span class="title">栅格宽度{{ index + 1 }}</span>
           <a-input-number class="inputNumber" size="small" :value="item.options.span" :min="1" :max="24" @change="(val) => colListChange(val, index)" />
@@ -27,17 +27,14 @@
 </template>
 
 <script setup>
-import { defineProps, inject } from 'vue'
+import { inject, reactive } from 'vue'
 
 const WidgetData = inject('$WidgetData')
 const selectKey = WidgetData.selectKey
-const element = WidgetData.find(selectKey)
-const props = defineProps({
-  params: Object,
-})
+const element = reactive(WidgetData.find(selectKey))
 
 const add = () => {
-  WidgetData.addChildren(1, props.params.key)
+  WidgetData.addChildren(1, element)
 }
 
 const colListChange = (val, index) => {
