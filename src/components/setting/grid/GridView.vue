@@ -1,5 +1,5 @@
 <template>
-  <a-divider>栅格属性</a-divider>
+  <a-divider>常规属性</a-divider>
   <a-form
     :model="element"
     :label-col="{ span: 6 }"
@@ -13,6 +13,7 @@
     <a-form-item label="高度" name="colHeight" >
       <a-input-number v-model:value="element.options.colHeight" :min="50" />
     </a-form-item>
+    <a-divider>栅格属性</a-divider>
     <a-form-item label="当前栅格列:" :labelCol="{span: 24}" :wrapperCol="{span: 24}">
       <div class="list">
         <div class="item" v-for="(item, index) in element.children" :key="index">
@@ -30,8 +31,7 @@
 import { inject, reactive } from 'vue'
 
 const WidgetData = inject('$WidgetData')
-const selectKey = WidgetData.selectKey
-const element = reactive(WidgetData.find(selectKey))
+const element = reactive(WidgetData.find(WidgetData.selectKey))
 
 const add = () => {
   WidgetData.addChildren(1, element)

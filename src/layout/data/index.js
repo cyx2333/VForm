@@ -89,7 +89,6 @@ class WidgetData {
   addChildren(count, element) {
     // 向对应parentKey添加count数量的子项
     if (count) {
-      console.log(element, this.widgetList);
       for (let i = 0; i < count; i++) {
         let key = element.defaultChildrenObject.type + generateId()
         let item = deepCopyObject(Object.assign({
