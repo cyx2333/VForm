@@ -22,10 +22,12 @@ const WidgetData = inject('$WidgetData')
 const list = ref(Array.from(props.list))
 
 WidgetData.addObserver(props.viewKey, () => {
-  if (props.viewKey.indexOf('Premier') >= 0) {
-    list.value = Array.from(WidgetData.widgetList)
-  } else {
-    list.value = Array.from(WidgetData.find(props.viewKey).children)
+  if (props.viewKey) {
+    if (props.viewKey.indexOf('Premier') >= 0) {
+      list.value = Array.from(WidgetData.widgetList)
+    } else {
+      list.value = Array.from(WidgetData.find(props.viewKey).children)
+    }
   }
 })
 

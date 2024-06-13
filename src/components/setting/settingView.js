@@ -7,17 +7,6 @@ export default {
     type: String
   },
   setup() {
-    // const WidgetData = inject('$WidgetData')
-    // const key = 'settingView'
-    // const type = ref('')
-    // const params = ref({})
-
-    // WidgetData.addObserver(key, () => {
-    //   type.value = WidgetData.elementType || ''
-    //   params.value = deepCopyObject(WidgetData.find(WidgetData.selectKey))
-    //   console.log('Observer', params.value);
-    // })
-
     return {
     }
   },

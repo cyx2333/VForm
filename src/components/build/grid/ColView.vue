@@ -1,5 +1,13 @@
 <template>
-  <a-col :style="{minHeight: params.options.colHeight + 'px'}" :span="item.options.span" v-for="(item, index) in params.children" :key="index">
+  <a-col 
+    :style="{minHeight: params.options.colHeight + 'px'}" 
+    :span="item.options.span" 
+    v-for="(item, index) in params.children" 
+    :key="index" 
+    :offset="item.options.offset" 
+    :pull="item.options.pull"
+    :push="item.options.push"
+  >
     <Wrapper class="colContent" :params="item">
       <DragView :viewKey="item.key" :list="item.children" @change="(e) => onChange(e, item.key)"></DragView>
     </Wrapper>

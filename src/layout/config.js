@@ -15,6 +15,9 @@ export default [{
           type: 'col',
           options: {
             span: 12,
+            offset: 0,
+            push: 0,
+            pull: 0,
           }
         },
         children:[],
@@ -22,23 +25,21 @@ export default [{
       {
         type: 'card',
         title: '卡片',
-        icon: 'CreditCardOutlined'
+        icon: 'CreditCardOutlined',
+        options: {
+          title: 'card',
+          hidden: false,
+          showFold: true,
+          folded: false,
+        },
+        children: [],
       },
     ]
   },
   {
     key: 2,
-    header: '容器',
-    children: [{
-        type: 'grid2',
-        title: '栅格',
-        icon: 'TableOutlined'
-      },
-      {
-        type: 'card2',
-        title: '卡片',
-        icon: 'CreditCardOutlined'
-      },
+    header: '基础组件',
+    children: [
     ]
   },
 ]
