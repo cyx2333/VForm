@@ -41,14 +41,34 @@ class WidgetData {
         state[key] = new Proxy(value, this.proxyHandler())
       }
     })
-    state.__isReactive__ = true
     return new Proxy(state, this.proxyHandler())
   }
 
   setWidgetList(mod, data, list = this.widgetList) {
     // console.log(mod,data, this.widgetList);
     if (mod == 'added') {
-      this.add(data, list)
+      let widgetList = list
+      let newIndex = data['newIndex']
+      let element = deepCopyObject(data['element'])
+      element.key = element.key ?? element.type + generateId() // 生成唯一key
+      // 当element中options存在defaultChildrenCount时，生成对应的children（包含 父级key、defaultChildrenOptions中的内容）
+      if (element.defaultChildrenCount && element.children.length === 0) {
+        for (let i = 0; i < element.defaultChildrenCount; i++) {
+          let key = element.defaultChildrenObject.type + generateId()
+          let item = deepCopyObject(Object.assign({
+            parentKey: element.key,
+            key,
+            children: [],
+          }, element.defaultChildrenObject))
+          element.children.push(item)
+        }
+      }
+
+      if (newIndex == widgetList.length) {
+        widgetList.push(this.createReactive(element))
+      } else if (newIndex < widgetList.length) {
+        widgetList.splice(newIndex, 0, element)
+      }
     } else if (mod == 'moved') {
       let widgetList = deepCopyArray(list)
       let newIndex = data['newIndex']
@@ -61,26 +81,6 @@ class WidgetData {
       let oldIndex = data['oldIndex']
       list.splice(oldIndex, 1) // 删除元素
     }
-  }
-  
-  add(data, list) {
-    let newIndex = data['newIndex']
-    let element = !data['element'].__isReactive__ ? deepCopyObject(data['element']) : data['element']
-    element.key = element.key ?? element.type + generateId() // 生成唯一key
-    // 当element中options存在defaultChildrenCount时，生成对应的children（包含 父级key、defaultChildrenOptions中的内容）
-    if (element.defaultChildrenCount && element.children.length === 0) {
-      for (let i = 0; i < element.defaultChildrenCount; i++) {
-        let key = element.defaultChildrenObject.type + generateId()
-        let item = deepCopyObject(Object.assign({
-          parentKey: element.key,
-          key,
-          children: [],
-        }, element.defaultChildrenObject))
-        element.children.push(item)
-      }
-    }
-
-    list.splice(newIndex, 0, this.createReactive(element))
   }
 
   setChildrenWidget(mod, data, parentKey) {

@@ -26,7 +26,10 @@ WidgetData.addObserver(props.viewKey, () => {
     if (props.viewKey.indexOf('Premier') >= 0) {
       list.value = Array.from(WidgetData.widgetList)
     } else {
-      list.value = Array.from(WidgetData.find(props.viewKey).children)
+      let item = WidgetData.find(props.viewKey)
+      if (item) {
+        list.value = Array.from(item.children)
+      }
     }
   }
 })
