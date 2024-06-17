@@ -47,7 +47,6 @@ class WidgetData {
 
   setWidgetList(mod, data, list = this.widgetList) {
     // console.log(mod, data, deepCopyArray(this.widgetList), this.widgetList, list);
-    console.time()
     if (mod == 'added') {
       this.add(data, list)
     } else if (mod == 'moved') {
@@ -56,14 +55,11 @@ class WidgetData {
       let oldIndex = data['oldIndex']
       list.splice(oldIndex, 1) // 删除元素
     }
-    console.log(mod);
-    console.timeEnd()
   }
   
   add(data, list) {
     let newIndex = data['newIndex']
     let element = !data['element'].__isReactive__ ? deepCopyObject(data['element']) : data['element']
-    // console.log(data);
     element.key = element.key ?? element.type + generateId() // 生成唯一key, 且避免重复生成
     // 当element中options存在defaultChildrenCount时，生成对应的children（包含 父级key、defaultChildrenOptions中的内容）
     if (element.defaultChildrenCount && element.children.length === 0) {
@@ -79,7 +75,6 @@ class WidgetData {
     }
 
     list.splice(newIndex, 0, !data['element'].__isReactive__ ? this.createReactive(element) : element)
-    // console.log(list, element);
   }
 
   move(list, newIndex, oldIndex) {

@@ -19,7 +19,7 @@
         <div class="item" v-for="(item, index) in element.children" :key="index">
           <span class="title">栅格宽度{{ index + 1 }}</span>
           <a-input-number class="inputNumber" size="small" :value="item.options.span" :min="1" :max="24" @change="(val) => colListChange(val, index)" />
-          <a-icon class="delete" name="MinusCircleOutlined" size="20" style="color: #ff4d4f;" />
+          <a-icon class="delete" name="MinusCircleOutlined" @click="()=>remove(index)" size="20" style="color: #ff4d4f;" />
         </div>
       </div>
       <a-button type="primary" @click="add">增加栅格</a-button>
@@ -39,6 +39,10 @@ const add = () => {
 
 const colListChange = (val, index) => {
   element.children[index].options.span = val
+}
+
+const remove = (idx) => {
+  element.children.splice(idx, 1)
 }
 
 </script>
