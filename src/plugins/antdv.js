@@ -1,4 +1,4 @@
-import {Button, Card, Col, Collapse, Divider, Form, FormItem, Grid, Input, InputNumber, Row, Space, Switch, Tooltip} from 'ant-design-vue'
+import {Button, Card, Col, Collapse, Divider, Form, FormItem, Grid, Input, InputNumber, Radio, RadioGroup, Row, Space, Switch, TabPane, Tabs, Tooltip} from 'ant-design-vue'
 
 export default {
   install(Vue) {
@@ -17,5 +17,9 @@ export default {
       .use(InputNumber)
       .use(Divider)
       .use(Card)
+      .use(Tabs)
+      .use(TabPane)
+      .use(RadioGroup)
+      .use(Radio)
   }
 }

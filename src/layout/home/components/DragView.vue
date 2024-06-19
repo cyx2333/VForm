@@ -1,5 +1,11 @@
 <template>
-  <draggable :list="list" v-bind="{ group: 'panel', ghostClass: 'ghost', handle: '.drag-handler', pull: true, put: false, animation: 300}" class="content" @change="onChange" item-key="key">
+  <draggable 
+    :list="list" 
+    v-bind="{ group: 'panel', ghostClass: 'ghost', handle: '.drag-handler', pull: true, put: false, animation: 300}" 
+    :class="dragClass" 
+    @change="onChange" 
+    item-key="key"
+  >
     <template #item="{ element }">
       <xcomponent :params="element" />
     </template>
@@ -14,8 +20,14 @@ import xcomponent from '../../xcomponents'
 const emits = defineEmits(['change'])
 const props = defineProps({
   list: Array,
-  viewKey: String
+  viewKey: String,
+  inComponent: {
+    type: Boolean,
+    default: false
+  }
 })
+
+const dragClass = props.inComponent?'content2':'content'
 
 const WidgetData = inject('$WidgetData')
 
@@ -46,5 +58,9 @@ const onChange = (e) => {
   width: calc(100% - 20px);
   min-height: calc(100% - 20px - 42px);
   margin: 10px;
+}
+.content2{
+  height: calc(100% - 20px);
+  margin: 10px 0;
 }
 </style>

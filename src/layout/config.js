@@ -34,6 +34,23 @@ export default [{
         },
         children: [],
       },
+      {
+        type: 'tabs',
+        title: '标签页',
+        icon: 'FolderOutlined',
+        defaultChildrenCount: 2,
+        defaultChildrenObject: {
+          type: 'tabPane',
+          options: {
+            title:''
+          }
+        },
+        options: {
+          hidden: false,
+          activeKey: '',
+        },
+        children: [],
+      },
     ]
   },
   {

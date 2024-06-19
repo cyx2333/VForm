@@ -6,13 +6,17 @@
     </div>
     <div class="container-action" v-show="selected">
       <a-tooltip class="i" placement="bottom">
+        <template #title>返回上级</template>
+        <a-icon name="VerticalAlignTopOutlined" />
+      </a-tooltip>
+      <!-- <a-tooltip class="i" placement="bottom">
         <template #title>上移组件</template>
         <a-icon name="ArrowUpOutlined" />
       </a-tooltip>
       <a-tooltip class="i" placement="bottom">
         <template #title>下移组件</template>
         <a-icon name="ArrowDownOutlined" />
-      </a-tooltip>
+      </a-tooltip> -->
       <a-tooltip class="i" placement="bottom">
         <template #title>移除组件</template>
         <a-icon name="DeleteOutlined" />

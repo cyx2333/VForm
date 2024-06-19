@@ -9,7 +9,7 @@
     :push="item.options.push"
   >
     <Wrapper class="colContent" :params="item">
-      <DragView :viewKey="item.key" :list="item.children" @change="(e) => onChange(e, item.key)"></DragView>
+      <DragView :viewKey="item.key" :list="item.children" @change="(e) => onChange(e, item.key)" inComponent></DragView>
     </Wrapper>
   </a-col>
 </template>

@@ -72,6 +72,7 @@ class WidgetData {
         }, element.defaultChildrenObject))
         element.children.push(item)
       }
+      this.additional(element)
     }
 
     list.splice(newIndex, 0, !data['element'].__isReactive__ ? this.createReactive(element) : element)
@@ -148,6 +149,16 @@ class WidgetData {
     let index = this.observers.findIndex(e => e.key === key)
     if (index >= 0) {
       this.observers.splice(index, 1)
+    }
+  }
+
+  additional(element) {
+    // 当一些组件需要做额外操作时
+    // 例如：tabs组件要定义默认的选中activeKey
+    switch (element.type) {
+      case 'tabs':
+        element.options.activeKey = element.children[0].key
+        break;
     }
   }
 
