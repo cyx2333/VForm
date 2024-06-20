@@ -5,7 +5,7 @@ export default [{
       {
         type: 'grid',
         title: '栅格',
-        icon: 'TableOutlined',
+        icon: 'icon-appstore-outlined1',
         options: {
           hidden: false,
           colHeight: 50,
@@ -25,7 +25,7 @@ export default [{
       {
         type: 'card',
         title: '卡片',
-        icon: 'CreditCardOutlined',
+        icon: 'icon-icon_creditcard_outlined',
         options: {
           title: 'card',
           hidden: false,
@@ -37,7 +37,7 @@ export default [{
       {
         type: 'tabs',
         title: '标签页',
-        icon: 'FolderOutlined',
+        icon: 'icon-biaoqianye',
         defaultChildrenCount: 2,
         defaultChildrenObject: {
           type: 'tabPane',
@@ -57,6 +57,11 @@ export default [{
     key: 2,
     header: '基础组件',
     children: [
+      {
+        type: 'input',
+        icon: 'icon-input',
+        title: '单行输入',
+      },
     ]
   },
 ]

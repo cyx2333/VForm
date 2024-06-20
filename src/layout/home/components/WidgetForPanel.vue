@@ -1,6 +1,7 @@
 <template>
   <div class="item">
-    <a-icon :name="icon" />
+    <!-- <a-icon :name="icon" /> -->
+    <a-iconfont :type="icon" />
     {{ title }}
   </div>
 </template>

@@ -11,7 +11,7 @@
       <a-switch v-model:checked="element.options.hidden" />
     </a-form-item>
     <a-divider>标签页属性</a-divider>
-    <a-form-item label="当前栅格列:" :labelCol="{span: 24}" :wrapperCol="{span: 24}">
+    <a-form-item label="当前标签:" :labelCol="{span: 24}" :wrapperCol="{span: 24}">
       <div class="list">
         <a-radio-group v-model:value="element.options.activeKey" >
           <div class="item" v-for="(item, index) in element.children" :key="index">
@@ -24,7 +24,7 @@
           </div>
         </a-radio-group>
       </div>
-      <a-button type="primary" @click="add">增加栅格</a-button>
+      <a-button type="primary" @click="add">增加标签</a-button>
     </a-form-item>
   </a-form>
 </template>
