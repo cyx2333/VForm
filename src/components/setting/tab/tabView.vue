@@ -48,10 +48,6 @@ const remove = (key, idx) => {
   }
 }
 
-// const titleChange = (val, index) => {
-//   element.children[index].options.title = val
-// }
-
 </script>
 
 <style lang="less" scoped>
