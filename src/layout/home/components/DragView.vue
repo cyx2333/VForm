@@ -56,7 +56,7 @@ const onChange = (e) => {
 .content{
   background: #fff;
   width: calc(100% - 20px);
-  min-height: calc(100% - 20px - 42px);
+  min-height: calc(100vh - 20px - 90px);
   margin: 10px;
 }
 .content2{

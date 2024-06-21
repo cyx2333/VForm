@@ -4,7 +4,11 @@
       <a-button class="btn">Layout</a-button>
       <a-button class="btn">Menu</a-button>
     </div>
-    <DragView :viewKey="key" :list="list" @change="onChange" ></DragView>
+    <a-form
+      autocomplete="off"
+    >
+      <DragView :viewKey="key" :list="list" @change="onChange" ></DragView>
+    </a-form>
   </div>
 </template>
 
@@ -47,5 +51,10 @@ onBeforeUnmount(() => {
 }
 .chosenClass {
   background-color: #f1f1f1;
+}
+</style>
+<style>
+.draw .ant-form-item{
+  margin-bottom: 0;
 }
 </style>

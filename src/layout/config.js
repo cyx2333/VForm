@@ -61,6 +61,9 @@ export default [{
         type: 'input',
         icon: 'icon-input',
         title: '单行输入',
+        options: {
+          label: 'input'
+        },
       },
     ]
   },

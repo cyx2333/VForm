@@ -1,5 +1,5 @@
 <template>
-  <div :class="['wrapper', selected?'selected':'']" @click.stop="onClick">
+  <div :class="['wrapper', border?'border':'',selected?'selected':'']" @click.stop="onClick">
     <slot></slot>
     <div class="drag-handler" v-show="selected">
       <a-icon name="DragOutlined"></a-icon>
@@ -29,6 +29,10 @@
 import {computed, defineProps, inject, onBeforeUnmount} from 'vue'
 const props =  defineProps({
   params: Object,
+  border: {
+    type: Boolean,
+    default: true
+  }
 })
 
 const WidgetData = inject('$WidgetData')
@@ -48,8 +52,6 @@ onBeforeUnmount(() => {
 <style lang="less" scoped>
 .wrapper{
   padding: 2px;
-  border: 1px dashed rgba(170, 170, 170, .75);
-  outline: 1px dashed #336699;
   position: relative;
   margin-bottom: 5px;
   .container-action{
@@ -80,6 +82,10 @@ onBeforeUnmount(() => {
     padding: 0 4px;
     cursor: move;
   }
+}
+.border{
+  border: 1px dashed rgba(170, 170, 170, .75);
+  outline: 1px dashed #336699;
 }
 .selected{
   outline: 2px solid #409EFF;
