@@ -30,6 +30,9 @@ WidgetData.addObserver(key, () => {
 </style>
 <style>
 .attr .ant-form-item{
-  margin-bottom: 12px;
+  margin-bottom: 6px;
+}
+.attr .input{
+  width: 160px;
 }
 </style>

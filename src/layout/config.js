@@ -62,7 +62,12 @@ export default [{
         icon: 'icon-input',
         title: '单行输入',
         options: {
-          label: 'input'
+          label: 'input',
+          labelSpan: 2,
+          wrapperSpan: 22,
+          type: 'text',
+          labelAlign: 'right',
+          placeholder: ''
         },
       },
     ]
