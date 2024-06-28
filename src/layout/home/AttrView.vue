@@ -26,6 +26,8 @@ WidgetData.addObserver(key, () => {
   border-left: 2px dotted #EBEEF5;
   background: #fff;
   padding: 12px;
+  overflow-y: auto;
+  height: calc(100vh - 48px);
 }
 </style>
 <style>

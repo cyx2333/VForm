@@ -36,7 +36,7 @@ class WidgetData {
   createReactive(state) {
     Object.keys(state).forEach(key => { 
       let value = state[key]
-      if (typeof value === "object") {
+      if (Object.prototype.toString.call(value) === '[object Object]' || Object.prototype.toString.call(value) === '[object Array]') {
         this.createReactive(value)
         state[key] = new Proxy(value, this.proxyHandler())
       }

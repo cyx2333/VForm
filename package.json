@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "ace-builds": "^1.35.0",
     "ant-design-vue": "4.x",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vue3-ace-editor": "^2.2.4",
     "vuedraggable": "^4.1.0",
     "vuex": "^4.0.0"
   },

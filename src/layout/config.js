@@ -67,7 +67,16 @@ export default [{
           wrapperSpan: 22,
           type: 'text',
           labelAlign: 'right',
-          placeholder: ''
+          placeholder: '',
+          defaultValue: '',
+          required: false,
+          requiredHint: '',
+          validation: '', // 字段校验类型
+          validationHint: '',
+          allowClear: false,
+          disabled: false,
+          onChange: null,
+          onInput: null,
         },
       },
     ]
