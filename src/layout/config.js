@@ -79,6 +79,46 @@ export default [{
           onInput: null,
         },
       },
+      {
+        type: 'textarea',
+        icon: 'icon-textarea',
+        title: '多行输入',
+        options: {
+          label: 'textarea',
+          labelSpan: 2,
+          wrapperSpan: 22,
+          labelAlign: 'right',
+          placeholder: '',
+          rows: 3,
+          defaultValue: '',
+          required: false,
+          requiredHint: '',
+          validation: '', // 字段校验类型
+          validationHint: '',
+          allowClear: false,
+          disabled: false,
+          onChange: null,
+          onInput: null,
+        },
+      },
+      {
+        type: 'radio',
+        icon: 'icon-radiobox',
+        title: '单选项',
+        options: {
+          label: 'radio',
+          labelSpan: 2,
+          wrapperSpan: 22,
+          defaultValue: '',
+          labelAlign: 'right',
+          disabled: false,
+          optionItems: [
+            {label: 'value1', value: 1},
+            {label: 'value2', value: 2},
+            {label: 'value3', value: 3},
+          ]
+        },
+      },
     ]
   },
 ]

@@ -1,4 +1,4 @@
-import {Alert, Button, Card, Col, Collapse, CollapsePanel, Divider, Form, FormItem, Grid, Input, InputNumber, InputPassword, Modal, Radio, RadioGroup, Row, Select, SelectOption, Space, Switch, TabPane, Tabs, Tooltip} from 'ant-design-vue'
+import {Alert, Button, Card, Col, Collapse, CollapsePanel, Divider, Form, FormItem, Grid, Input, InputNumber, InputPassword, Modal, Radio, RadioGroup, Row, Select, SelectOption, Space, Switch, TabPane, Tabs, Textarea, Tooltip} from 'ant-design-vue'
 
 export default {
   install(Vue) {
@@ -27,5 +27,6 @@ export default {
       .use(CollapsePanel)
       .use(Modal)
       .use(Alert)
+      .use(Textarea)
   }
 }
