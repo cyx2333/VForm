@@ -7,7 +7,7 @@
       :labelAlign="params.options.labelAlign"
       :rules="rules"
     >
-      <a-radio-group 
+      <a-checkbox-group 
         v-model:value="value" 
         :options="plainOptions" 
         :disabled="params.options.disabled" 

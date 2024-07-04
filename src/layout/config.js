@@ -127,10 +127,10 @@ export default [{
         icon: 'icon-checkbox-checked',
         title: '多选项',
         options: {
-          label: 'radio',
+          label: 'checkbox',
           labelSpan: 2,
           wrapperSpan: 22,
-          defaultValue: '',
+          defaultValue: [],
           labelAlign: 'right',
           disabled: false,
           size: 'default',

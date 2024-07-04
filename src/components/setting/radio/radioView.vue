@@ -66,9 +66,6 @@
       </a-button>
     </div>
   </div>
-  <a-modal v-model:open="openRadioEdit" title="设置选项属性" @ok="radioHandle">
-    <a-textarea v-model:value="radioText" :autoSize="{minRows: 8, maxRows: 8}" />
-  </a-modal>
   <aceEditor :title="title" v-model:open="open" v-model:functionsCode="element.options[eventName]" />
 </template>
 
@@ -81,7 +78,6 @@ const WidgetData = inject('$WidgetData')
 const element = reactive(WidgetData.find(WidgetData.selectKey))
 let eventName = ref('')
 const open = ref(false)
-const openRadioEdit = ref(false)
 const eventNameList = ['onChange']
 
 const openEditor = (name) => {
@@ -92,26 +88,6 @@ const openEditor = (name) => {
 const title = computed(() => {
   return element.key + '.' + eventName.value
 })
-
-const radioText = ref('')
-element.options.optionItems.forEach(item => {
-  radioText.value += item.value + ',' + item.label + '\n'
-})
-const radioHandle = () => {
-  let text = radioText.value
-  let res = []
-  text.split('\n').forEach(item => {
-    if (item !== '' && item.indexOf(',') > 0) {
-      let arr = item.split(',')
-      res.push({
-        label: arr[1],
-        value: arr[0]
-      })
-    }
-  })
-  element.options.optionItems = res
-  openRadioEdit.value = false
-}
 
 </script>
 

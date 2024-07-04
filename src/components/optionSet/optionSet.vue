@@ -26,22 +26,28 @@
     </div>
     <div v-if="type === 'checkbox'">
       <a-checkbox-group class="list" v-model:value="value">
-        <template #item="{ element }">
-          <div>
-            <a-checkbox class="item" :key="element.value" :value="element.value">
-              <a-input class="input" v-model:value="element.value" size="small" />
-              <a-input class="input" v-model:value="element.label" size="small" />
-              <a-iconfont class="move-handler" type="icon-drag" size="18" />
-            </a-checkbox>
-            <a-icon class="delete" name="MinusCircleOutlined" size="18" style="color: #ff4d4f;" @click="()=>del(element.value)" />
-          </div>
-        </template>
+        <draggable 
+          :list="options" 
+          v-bind="{ group: 'options', ghostClass: 'move', handle: '.move-handler', pull: true, put: false, animation: 300}" 
+          item-key="key"
+        >
+          <template #item="{ element }">
+            <div>
+              <a-checkbox class="item" :value="element.value">
+                <a-input class="input" v-model:value="element.value" size="small" />
+                <a-input class="input" v-model:value="element.label" size="small" />
+                <a-iconfont class="move-handler" type="icon-drag" size="18" />
+              </a-checkbox>
+              <a-icon class="delete" name="MinusCircleOutlined" size="18" style="color: #ff4d4f;" @click="()=>del(element.value)" />
+            </div>
+          </template>
+        </draggable>
       </a-checkbox-group>
     </div>
     <div class="btn">
       <a-space :size="2">
         <a-button type="link" @click="add">增加选项</a-button>
-        <a-button type="link" @click="openEdit = true" >批量编辑</a-button>
+        <a-button type="link" @click="startEdit" >批量编辑</a-button>
         <a-button type="link" @click="reset" >重设选择项</a-button>
       </a-space>
     </div>
@@ -52,31 +58,35 @@
 </template>
 
 <script setup>
+import { message } from 'ant-design-vue';
 import { defineProps, defineModel, inject, ref } from 'vue';
 import draggable from "vuedraggable";
 const WidgetData = inject('$WidgetData')
 
-defineProps({
+const props = defineProps({
   type: String, // radio、checkbox
 })
 const options = defineModel('options')
 const value = defineModel('value')
 const openEdit = ref(false)
+let num = options.value.length
 
 // 设置批量编辑的初始值
 const radioText = ref('')
-options.value.forEach(item => {
-  radioText.value += item.value + ',' + item.label + '\n'
-})
 
 const add = () => {
   options.value.push(WidgetData.createReactive({
     label: 'new option',
-    value: options.value.length + 1,
+    value: ++num,
   }))
 }
 
 const del = (val) => {
+  if (props.type === 'radio' && val === value.value) {
+    return message.warning('请取消选中再删除')
+  } else if (props.type === 'checkbox' && value.value.find(o => o === val)) {
+    return message.warning('请取消选中再删除')
+  }
   options.value = options.value.filter(item => item.value !== val)
 }
 
@@ -99,6 +109,15 @@ const radioHandle = () => {
   options.value = WidgetData.createReactive(res)
   openEdit.value = false
 }
+
+const startEdit = () => {
+  radioText.value = ''
+  options.value.forEach(item => {
+    radioText.value += item.value + ',' + item.label + '\n'
+  })
+  openEdit.value = true
+}
+
 </script>
 
 <style lang="less" scoped>

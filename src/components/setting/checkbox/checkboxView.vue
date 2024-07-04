@@ -54,17 +54,7 @@
       <a-switch v-model:checked="element.options.disabled" />
     </a-form-item>
     <a-divider>选项属性</a-divider>
-    <a-form-item label="选项设置" name="optionItems" >
-      <a-button type="default" shape="round" size="small" @click="openRadioEdit = true">
-        <a-icon name="EditOutlined" />
-        设置选项
-      </a-button>
-    </a-form-item>
-    <a-form-item label="默认值" name="defaultValue" >
-      <a-select v-model:value="element.options.defaultValue" size="small" allowClear>
-        <a-select-option :value="item.value" v-for="item in element.options.optionItems" :key="item.value">{{item.label}}</a-select-option>
-      </a-select>
-    </a-form-item>
+    <optionSet type="checkbox" v-model:options="element.options.optionItems" v-model:value="element.options.defaultValue" />
   </a-form>
   <a-divider>事件属性</a-divider>
   <div class="event_list">
@@ -76,21 +66,18 @@
       </a-button>
     </div>
   </div>
-  <a-modal v-model:open="openRadioEdit" title="设置选项属性" @ok="radioHandle">
-    <a-textarea v-model:value="radioText" :autoSize="{minRows: 8, maxRows: 8}" />
-  </a-modal>
   <aceEditor :title="title" v-model:open="open" v-model:functionsCode="element.options[eventName]" />
 </template>
 
 <script setup>
 import { computed, inject, reactive, ref } from 'vue'
 import aceEditor from '@/components/ace-editor/ace-editor.vue';
+import optionSet from '@/components/optionSet/optionSet.vue'
 
 const WidgetData = inject('$WidgetData')
 const element = reactive(WidgetData.find(WidgetData.selectKey))
 let eventName = ref('')
 const open = ref(false)
-const openRadioEdit = ref(false)
 const eventNameList = ['onChange']
 
 const openEditor = (name) => {
@@ -101,26 +88,6 @@ const openEditor = (name) => {
 const title = computed(() => {
   return element.key + '.' + eventName.value
 })
-
-const radioText = ref('')
-element.options.optionItems.forEach(item => {
-  radioText.value += item.value + ',' + item.label + '\n'
-})
-const radioHandle = () => {
-  let text = radioText.value
-  let res = []
-  text.split('\n').forEach(item => {
-    if (item !== '' && item.indexOf(',') > 0) {
-      let arr = item.split(',')
-      res.push({
-        label: arr[1],
-        value: arr[0]
-      })
-    }
-  })
-  element.options.optionItems = res
-  openRadioEdit.value = false
-}
 
 </script>
 
