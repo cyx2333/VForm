@@ -112,6 +112,30 @@ export default [{
           defaultValue: '',
           labelAlign: 'right',
           disabled: false,
+          size: 'default',
+          optionType: 'default',
+          buttonStyle: 'solid',
+          optionItems: [
+            {label: 'value1', value: 1},
+            {label: 'value2', value: 2},
+            {label: 'value3', value: 3},
+          ]
+        },
+      },
+      {
+        type: 'checkbox',
+        icon: 'icon-checkbox-checked',
+        title: '多选项',
+        options: {
+          label: 'radio',
+          labelSpan: 2,
+          wrapperSpan: 22,
+          defaultValue: '',
+          labelAlign: 'right',
+          disabled: false,
+          size: 'default',
+          optionType: 'default',
+          buttonStyle: 'solid',
           optionItems: [
             {label: 'value1', value: 1},
             {label: 'value2', value: 2},

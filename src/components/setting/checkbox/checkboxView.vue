@@ -54,7 +54,17 @@
       <a-switch v-model:checked="element.options.disabled" />
     </a-form-item>
     <a-divider>选项属性</a-divider>
-    <optionSet type="radio" v-model:options="element.options.optionItems" v-model:value="element.options.defaultValue" />
+    <a-form-item label="选项设置" name="optionItems" >
+      <a-button type="default" shape="round" size="small" @click="openRadioEdit = true">
+        <a-icon name="EditOutlined" />
+        设置选项
+      </a-button>
+    </a-form-item>
+    <a-form-item label="默认值" name="defaultValue" >
+      <a-select v-model:value="element.options.defaultValue" size="small" allowClear>
+        <a-select-option :value="item.value" v-for="item in element.options.optionItems" :key="item.value">{{item.label}}</a-select-option>
+      </a-select>
+    </a-form-item>
   </a-form>
   <a-divider>事件属性</a-divider>
   <div class="event_list">
@@ -75,7 +85,6 @@
 <script setup>
 import { computed, inject, reactive, ref } from 'vue'
 import aceEditor from '@/components/ace-editor/ace-editor.vue';
-import optionSet from '@/components/optionSet/optionSet.vue'
 
 const WidgetData = inject('$WidgetData')
 const element = reactive(WidgetData.find(WidgetData.selectKey))

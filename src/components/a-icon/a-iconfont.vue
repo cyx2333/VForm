@@ -17,7 +17,7 @@ defineProps({
 
 import { createFromIconfontCN } from '@ant-design/icons-vue';
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_4592977_gmrpqnubk0m.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_4592977_idsw26qxws.js',
 });
 </script>
 

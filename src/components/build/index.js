@@ -4,6 +4,7 @@ import tabs from "./tabs/tabView.vue"
 import input from "./input/inputView.vue"
 import textarea from "./textarea/textareaView.vue"
 import radio from "./radio/radioView.vue"
+import checkbox from "./checkbox/checkboxView.vue"
 
 export default {
   grid,
@@ -11,5 +12,6 @@ export default {
   tabs,
   input,
   textarea,
-  radio
+  radio,
+  checkbox
 }
