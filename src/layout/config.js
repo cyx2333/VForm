@@ -119,7 +119,8 @@ export default [{
             {label: 'value1', value: 1},
             {label: 'value2', value: 2},
             {label: 'value3', value: 3},
-          ]
+          ],
+          onChange: null,
         },
       },
       {
@@ -140,7 +141,33 @@ export default [{
             {label: 'value1', value: 1},
             {label: 'value2', value: 2},
             {label: 'value3', value: 3},
-          ]
+          ],
+          onChange: null,
+        },
+      },
+      {
+        type: 'select',
+        icon: 'icon-select-field',
+        title: '选择器',
+        options: {
+          label: 'select',
+          labelSpan: 2,
+          wrapperSpan: 22,
+          defaultValue: '',
+          labelAlign: 'right',
+          disabled: false,
+          size: 'default',
+          optionType: 'default',
+          buttonStyle: 'solid',
+          allowClear: false,
+          showSearch: true,
+          multiple: false,
+          optionItems: [
+            {label: 'value1', value: 1},
+            {label: 'value2', value: 2},
+            {label: 'value3', value: 3},
+          ],
+          onChange: null,
         },
       },
     ]

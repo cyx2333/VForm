@@ -6,6 +6,7 @@ import input from './input/inputView.vue'
 import textarea from './textarea/textareaView.vue'
 import radio from "./radio/radioView.vue"
 import checkbox from './checkbox/checkboxView.vue'
+import select from './select/selectView.vue'
 
 export default {
   grid,
@@ -15,5 +16,6 @@ export default {
   input,
   textarea,
   radio,
-  checkbox
+  checkbox,
+  select
 }

@@ -25,6 +25,25 @@
         <a-radio-button value="right">居右</a-radio-button>
       </a-radio-group>      
     </a-form-item>
+    <a-form-item label="类型" name="type" >
+      <a-select v-model:value="element.options.optionType" size="small">
+        <a-select-option value="default">普通</a-select-option>
+        <a-select-option value="button">按钮</a-select-option>
+      </a-select>
+    </a-form-item>
+    <a-form-item label="按钮大小" name="type" v-if="element.options.optionType === 'button'" >
+      <a-select v-model:value="element.options.size" size="small" >
+        <a-select-option value="default">普通</a-select-option>
+        <a-select-option value="large">大</a-select-option>
+        <a-select-option value="small">小</a-select-option>
+      </a-select>
+    </a-form-item>
+    <a-form-item label="按钮风格" name="type" v-if="element.options.optionType === 'button'" >
+      <a-select v-model:value="element.options.buttonStyle" size="small">
+        <a-select-option value="outline">轮廓</a-select-option>
+        <a-select-option value="solid">填充</a-select-option>
+      </a-select>
+    </a-form-item>
     <a-form-item label="必填项" name="required" >
       <a-switch v-model:checked="element.options.required" />
     </a-form-item>
@@ -34,8 +53,17 @@
     <a-form-item label="禁用" name="disabled" >
       <a-switch v-model:checked="element.options.disabled" />
     </a-form-item>
+    <a-form-item label="可清除" name="allowClear" >
+      <a-switch v-model:checked="element.options.allowClear" />
+    </a-form-item>
+    <a-form-item label="可搜索" name="showSearch" >
+      <a-switch v-model:checked="element.options.showSearch" />
+    </a-form-item>
+    <a-form-item label="多选" name="multiple" >
+      <a-switch v-model:checked="element.options.multiple" @change="multipleChange"/>
+    </a-form-item>
     <a-divider>选项属性</a-divider>
-    <optionSet type="radio" v-model:options="element.options.optionItems" v-model:value="element.options.defaultValue" />
+    <optionSet :type="element.options.multiple?'checkbox':'radio'" v-model:options="element.options.optionItems" v-model:value="element.options.defaultValue" />
   </a-form>
   <a-divider>事件属性</a-divider>
   <div class="event_list">
@@ -69,6 +97,14 @@ const openEditor = (name) => {
 const title = computed(() => {
   return element.key + '.' + eventName.value
 })
+
+const multipleChange = (status) => {
+  if (status) {
+    element.options.defaultValue = []
+  } else {
+    element.options.defaultValue = ''
+  }
+}
 
 </script>
 

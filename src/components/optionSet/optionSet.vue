@@ -127,7 +127,7 @@ const startEdit = () => {
   .item{
     margin-bottom: 8px;
     .input{
-      width: 85px;
+      width: 80px;
       margin-left: 5px;
     }
     .move-handler{
