@@ -1,4 +1,4 @@
-import {Alert, Button, Card, Checkbox, CheckboxGroup, Col, Collapse, CollapsePanel, Divider, Form, FormItem, Grid, Input, InputNumber, InputPassword, Modal, Radio, RadioGroup, Row, Select, SelectOption, Space, Switch, TabPane, Tabs, Textarea, Tooltip} from 'ant-design-vue'
+import {Alert, Button, Card, Checkbox, CheckboxGroup, Col, Collapse, CollapsePanel, Divider, Form, FormItem, Grid, Input, InputNumber, InputPassword, Modal, Radio, RadioGroup, Row, Select, SelectOption, Space, Switch, TabPane, Tabs, Textarea, TimePicker, TimeRangePicker, Tooltip} from 'ant-design-vue'
 
 export default {
   install(Vue) {
@@ -30,5 +30,7 @@ export default {
       .use(Textarea)
       .use(Checkbox)
       .use(CheckboxGroup)
+      .use(TimePicker)
+      .use(TimeRangePicker)
   }
 }

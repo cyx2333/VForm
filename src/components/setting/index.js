@@ -7,6 +7,7 @@ import textarea from './textarea/textareaView.vue'
 import radio from "./radio/radioView.vue"
 import checkbox from './checkbox/checkboxView.vue'
 import select from './select/selectView.vue'
+import timePicker from './timePicker/timePicker.vue'
 
 export default {
   grid,
@@ -17,5 +18,6 @@ export default {
   textarea,
   radio,
   checkbox,
-  select
+  select,
+  timePicker
 }

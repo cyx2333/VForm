@@ -170,6 +170,24 @@ export default [{
           onChange: null,
         },
       },
+      {
+        type: 'timePicker',
+        icon: 'icon-xiangmujincheng',
+        title: '时间选择器',
+        options: {
+          label: 'timePicker',
+          labelSpan: 3,
+          wrapperSpan: 5,
+          defaultValue: '',
+          labelAlign: 'right',
+          disabled: false,
+          size: 'default',
+          placeholder: '',
+          allowClear: false,
+          range: false,
+          valueFormat: 'HH:mm:ss',
+        }
+      },
     ]
   },
 ]
