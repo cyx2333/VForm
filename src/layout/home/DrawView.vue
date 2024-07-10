@@ -7,6 +7,7 @@
     <a-form
       autocomplete="off"
     >
+    
       <DragView :viewKey="key" :list="list" @change="onChange" ></DragView>
     </a-form>
   </div>

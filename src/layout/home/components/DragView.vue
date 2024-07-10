@@ -5,6 +5,7 @@
     :class="dragClass" 
     @change="onChange" 
     item-key="key"
+    :key="WidgetData.selectKey" 
   >
     <template #item="{ element }">
       <xcomponent :params="element" />

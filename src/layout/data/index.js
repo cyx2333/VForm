@@ -45,7 +45,8 @@ class WidgetData {
     return new Proxy(state, this.proxyHandler())
   }
 
-  setWidgetList(mod, data, list = this.widgetList) {
+  setWidgetList(mod, data, obj = null) {
+    let list = obj ? obj.children : this.widgetList
     // console.log(mod, data, deepCopyArray(this.widgetList), this.widgetList, list);
     if (mod == 'added') {
       this.add(data, list)
@@ -55,6 +56,7 @@ class WidgetData {
       let oldIndex = data['oldIndex']
       list.splice(oldIndex, 1) // 删除元素
     }
+    console.log(this.widgetList);
   }
   
   add(data, list) {
@@ -90,7 +92,8 @@ class WidgetData {
   setChildrenWidget(mod, data, parentKey) {
     // 向子项添加内容
     const list = this.find(parentKey)
-    this.setWidgetList(mod, data, list.children)
+    // this.setWidgetList(mod, data, list.children)
+    this.setWidgetList(mod, data, list)
   }
 
   addChildren(count, element) {
@@ -144,6 +147,19 @@ class WidgetData {
     return res
   }
 
+  getObserverKeys(key) {
+    // 通过key获取children下的Observers
+    let res = this.find(key)
+    let arr = []
+    if (res.children) {
+      res.children.forEach((item) => {
+        arr.push(item.key)
+      })
+    }
+    arr.push(key)
+    return arr
+  }
+
   removeObserver(key) {
     // 移除观察者
     let index = this.observers.findIndex(e => e.key === key)
@@ -160,6 +176,42 @@ class WidgetData {
         element.options.activeKey = element.children[0].key
         break;
     }
+  }
+
+  findRemoveList(key) {
+    let arr = []
+    const func = (list, key) => {
+      let idx = 0
+      for (let item of list) {
+        if (item.key === key) {
+          arr.push({
+            list,
+            index: idx,
+          })
+          break
+        } else {
+          if (item.children && item.children.length > 0) {
+            func(item.children, key)
+          }
+        }
+        idx++
+      }
+    }
+    func(this.widgetList, key)
+    return arr
+  }
+
+  remove(key) {
+    // 移除组件
+    let res = this.findRemoveList(key)
+    let Observers = this.getObserverKeys(key)
+    res.forEach(item => {
+      item.list.splice(item.index, 1)
+    })
+    Observers.forEach(key => this.removeObserver(key))
+    this.selectKey = ''
+    this.notify()
+    // console.log(res, this.observers, Observers, key);
   }
 
 }

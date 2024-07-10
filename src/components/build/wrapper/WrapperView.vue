@@ -17,7 +17,7 @@
         <template #title>下移组件</template>
         <a-icon name="ArrowDownOutlined" />
       </a-tooltip> -->
-      <a-tooltip class="i" placement="bottom">
+      <a-tooltip class="i" placement="bottom" @click="remove">
         <template #title>移除组件</template>
         <a-icon name="DeleteOutlined" />
       </a-tooltip>
@@ -47,6 +47,10 @@ const onClick = () => {
 onBeforeUnmount(() => {
   WidgetData.removeObserver(props.params.key) 
 })
+
+const remove = () => {
+  WidgetData.remove(props.params.key)
+}
 </script>
 
 <style lang="less" scoped>

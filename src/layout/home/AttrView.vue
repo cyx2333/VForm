@@ -1,6 +1,6 @@
 <template>
   <div class="attr">
-    <setting :key="selectKey" :type="type"></setting>
+    <setting v-if="selectKey" :key="selectKey" :type="type"></setting>
   </div>
 </template>
 
