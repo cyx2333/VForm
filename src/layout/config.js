@@ -188,6 +188,25 @@ export default [{
           valueFormat: 'HH:mm:ss',
         }
       },
+      {
+        type: 'datePicker',
+        icon: 'icon-mdatepicker',
+        title: '日期选择器',
+        options: {
+          label: 'datePicker',
+          labelSpan: 3,
+          wrapperSpan: 6,
+          defaultValue: '',
+          labelAlign: 'right',
+          disabled: false,
+          size: 'default',
+          placeholder: '',
+          allowClear: false,
+          range: false,
+          showtime: false,
+          valueFormat: 'YYYY-MM-DD',
+        }
+      },
     ]
   },
 ]

@@ -7,6 +7,7 @@ import radio from "./radio/radioView.vue"
 import checkbox from "./checkbox/checkboxView.vue"
 import select from "./select/selectView.vue"
 import timePicker from "./timePicker/timePicker.vue"
+import datePicker from "./datePicker/datePicker.vue"
 
 export default {
   grid,
@@ -17,5 +18,6 @@ export default {
   radio,
   checkbox,
   select,
-  timePicker
+  timePicker,
+  datePicker
 }
