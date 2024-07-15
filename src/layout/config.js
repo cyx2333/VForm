@@ -195,7 +195,7 @@ export default [{
         options: {
           label: 'datePicker',
           labelSpan: 3,
-          wrapperSpan: 6,
+          wrapperSpan: 22,
           defaultValue: '',
           labelAlign: 'right',
           disabled: false,

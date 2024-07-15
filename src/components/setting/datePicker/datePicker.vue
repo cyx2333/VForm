@@ -94,10 +94,8 @@ const title = computed(() => {
 
 const rangeChange = (status) => {
   if (status) {
-    element.options.wrapperSpan = 10
     element.options.defaultValue = WidgetData.createReactive([])
   } else {
-    element.options.wrapperSpan = 6
     element.options.defaultValue = ''
   }
 }
