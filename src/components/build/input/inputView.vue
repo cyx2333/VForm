@@ -8,7 +8,7 @@
       :rules="rules"
     >
       <a-input v-if="params.options.type === 'text'" :placeholder="params.options.placeholder" :defaultValue="params.options.defaultValue" :key="params.options.defaultValue" :disabled="params.options.disabled" :allowClear="params.options.allowClear"/>
-      <a-input-number v-if="params.options.type === 'number'" :placeholder="params.options.placeholder" :defaultValue="params.options.defaultValue" :key="params.options.defaultValue" :disabled="params.options.disabled" :allowClear="params.options.allowClear"/>
+      <a-input-number v-if="params.options.type === 'number'" :placeholder="params.options.placeholder" :defaultValue="params.options.defaultValue" :key="params.options.defaultValue" :disabled="params.options.disabled" :allowClear="params.options.allowClear" style="width: 100%;" />
       <a-input-password v-if="params.options.type === 'password'" :placeholder="params.options.placeholder" :defaultValue="params.options.defaultValue" :key="params.options.defaultValue" :disabled="params.options.disabled" :allowClear="params.options.allowClear"/>
     </a-form-item>
   </Wrapper>

@@ -1,6 +1,7 @@
 import build from "@/components/build";
-import { deepCopyObject } from "@/utils/util";
-import { h, inject, ref } from "vue";
+// import { deepCopyObject } from "@/utils/util";
+import { h  } from "vue";
+// import { inject } from 'vue';
 
 export default {
   props: {
@@ -8,24 +9,25 @@ export default {
   },
   setup(props) {
     const { params } = props
-    const WidgetData = inject('$WidgetData')
-    const obj = Object.assign({}, params)
-    const data = ref(obj)
-    if (params.key) {
-      WidgetData.addObserver(params.key, () => {
-        data.value = deepCopyObject(obj)
-      })
-    }
+    // const data = params
+    // const WidgetData = inject('$WidgetData')
+    // const obj = Object.assign({}, params)
+    // if (params.key) {
+    //   WidgetData.addObserver(params.key, () => {
+    //     // data.value = deepCopyObject(obj)
+    //     // console.log(data);
+    //   })
+    // }
 
     return {
-      data,
+      params,
     }
   },
   render() {
-    const data = this.data
-    const type = data.type
+    const params = this.params
+    const type = params.type
     return h(build[type], {
-      params: data
+      params,
     })
   },
 }

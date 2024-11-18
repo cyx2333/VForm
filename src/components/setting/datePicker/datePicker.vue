@@ -25,7 +25,7 @@
         <a-radio-button value="right">居右</a-radio-button>
       </a-radio-group>      
     </a-form-item>
-    <a-form-item label="占位内容" name="placeholder" >
+    <a-form-item label="提示内容" name="placeholder" >
       <a-input v-model:value="element.options.placeholder" size="small" />
     </a-form-item>
     <a-form-item label="必填项" name="required" >

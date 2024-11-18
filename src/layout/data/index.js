@@ -25,7 +25,7 @@ class WidgetData {
         return Reflect.get(target, key, receiver);
       },
       set(target, key, value, receiver) {
-        // console.log('set' + key);
+        // console.log('set' , value);
         Reflect.set(target, key, value, receiver)
         _this.notify()
         return true;
@@ -56,7 +56,6 @@ class WidgetData {
       let oldIndex = data['oldIndex']
       list.splice(oldIndex, 1) // 删除元素
     }
-    console.log(this.widgetList);
   }
   
   add(data, list) {
@@ -213,7 +212,6 @@ class WidgetData {
     this.notify()
     // console.log(res, this.observers, Observers, key);
   }
-
 }
 
 export default WidgetData
